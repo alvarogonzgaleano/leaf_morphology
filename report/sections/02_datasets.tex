@@ -1,0 +1,237 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[top=2.2cm,bottom=2.2cm,left=2.2cm,right=2.2cm]{geometry}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\title{\vspace{-1.5cm}Dataset comparison for leaf descriptor extraction}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-1.5cm}
+
+\section*{Introduction}
+
+When measuring leaf traits -such as aspect ratio, margin serration, color and venation-
+there are some relevant features from a dataset that may make the descriptors extraction easier.
+The criterion followed in this project compares ten different characteristics among the Flavia,
+Pl@ntNet300k, PlanCLEF and Herbarium 2021 datasets.
+
+These ten features are the number of images each dataset contains, the type of the images,
+what species have been included, the capture conditions, leaf availability, background, scale,
+resolution, annotations and licence/access.
+
+\section*{Comparison}
+
+\begingroup
+\scriptsize
+\renewcommand{\arraystretch}{1.25}
+\setlength{\tabcolsep}{3.5pt}
+
+\begin{tabularx}{\linewidth}{L{2.05cm} Y Y Y Y}
+\toprule
+ & \textbf{Flavia} & \textbf{Pl@ntNet-300K} &
+\textbf{PlantCLEF (2015--16 edition)} & \textbf{Herbarium 2021} \\
+\midrule
+
+\textbf{Images} &
+1,907 &
+306,146 (244k/31k/31k split) &
+113,205; other editions range from $\approx$1.4 M to $\approx$4 M &
+2,500,779 \\
+\addlinespace[3pt]
+
+\textbf{Image type} &
+Single isolated leaf, scanned &
+Field photographs (Pl@ntNet citizen science) &
+Field photographs plus leaf scans on a uniform background &
+Digitised herbarium sheets \\
+\addlinespace[3pt]
+
+\textbf{Species / taxa} &
+32 species (Yangtze delta, China) &
+1,081 species &
+$\approx$1,000 species (France and neighbouring regions) &
+64,500 taxa, normalised to LCVP \\
+\addlinespace[3pt]
+
+\textbf{Capture conditions} &
+Controlled and uniform &
+Uncontrolled: variable light, angle, distance; occlusions &
+Mixed: uncontrolled for photographs, controlled for the LeafScan subset &
+Semi-controlled, but pressed and aged material \\
+\addlinespace[3pt]
+
+\textbf{Leaf availability} &
+100\%, one leaf per image, no petiole &
+Multi-organ; a per-image organ tag allows a leaf subset to be selected &
+Multi-organ, with explicit \textit{Leaf} and \textit{LeafScan} view types:
+13,367 + 12,605 training images &
+Usually present, but overlapping, folded or fragmented \\
+\addlinespace[3pt]
+
+\textbf{Background} &
+Uniform white &
+Natural and arbitrary &
+Natural for photographs; uniform for LeafScan &
+Uniform pale sheet; labels automatically blurred \\
+\addlinespace[3pt]
+
+\textbf{Scale} &
+None &
+None &
+None &
+Yes: millimetre ruler and colour chart on the sheet \\
+\addlinespace[3pt]
+
+\textbf{Resolution} &
+$\approx$1600 $\times$ 1200 px &
+570 $\times$ 570 px on average (180--900) &
+Variable, typical digital-camera sizes &
+$\approx$6000 $\times$ 4000 px originals, released at 1000 px \\
+\addlinespace[3pt]
+
+\textbf{Annotations} &
+Species label only &
+Species (expertise-weighted user votes), organ, author, licence; official
+splits &
+Species, genus, family, view type, observation ID, user quality vote, date,
+locality, author &
+Taxon, family, order; accepted / unresolved status \\
+\addlinespace[3pt]
+
+\textbf{Licence / access} &
+Free download (SourceForge), cite Wu \textit{et al.} (2007) &
+CC BY 4.0 (Zenodo) &
+Creative Commons; download from the Pl@ntNet / LifeCLEF servers after
+registration &
+Kaggle (FGVC8), public after registration \\
+
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\section*{PlantCLEF in detail}
+
+PlantCLEF is not one dataset but a series of yearly editions whose task changes
+substantially, so the choice of edition matters more than the name:
+
+\begin{itemize}[leftmargin=1.4em,itemsep=0.2em,topsep=0.2em]
+  \item \textbf{2014--2016 (Pl@ntView).} Around 1,000 species from France and
+        neighbouring regions, with a view type annotated per image: Branch,
+        Entire, Flower, Fruit, Stem, \textit{Leaf} and \textit{LeafScan}. In
+        the 2015 release this gives 13,367 leaf photographs and 12,605 leaf
+        scans in the training set alone. These are the editions relevant here.
+  \item \textbf{2017.} Scaled up with noisy web-crawled images; organ
+        annotation becomes less reliable.
+  \item \textbf{2020--2021.} Cross-domain task: identify field photographs from
+        herbarium sheets. Interesting as a precedent for Herbarium 2021, not as
+        a source of leaf images.
+  \item \textbf{2022--2023.} Global scale, $\approx$80,000 species, combining
+        expert-verified and semi-reviewed web data. Diversity, but no gain in
+        measurable leaves.
+  \item \textbf{2024--2025.} Multi-label identification in 0.5 m\textsuperscript{2}
+        vegetation quadrats, where leaves overlap and cannot be isolated. Not
+        usable for measurement, although the DINOv2 model released with the
+        2024 edition may be useful as a feature extractor.
+\end{itemize}
+
+A reasonable leaf subset can therefore be selected from PlantCLEF, and the
+\textit{LeafScan} category is the interesting part: leaves photographed or
+scanned against a uniform background, i.e.\ Flavia-like conditions but with
+$\approx$1,000 species instead of 32. That gives an intermediate step between
+the controlled and the natural setting rather than a jump straight from one to
+the other.
+
+\section*{PlantCLEF or Pl@ntNet-300K for the natural-conditions stage?}
+
+Both provide a way to select leaves, and neither provides a scale, so the
+decision rests on what each allows us to \emph{evaluate}:
+
+\begin{itemize}[leftmargin=1.4em,itemsep=0.25em,topsep=0.2em]
+  \item \textbf{Repeatability.} PlantCLEF groups images by observation, so
+        several images of the same individual plant can be compared. That makes
+        it possible to measure whether a descriptor returns consistent values
+        for the same leaf under different capture conditions --- arguably the
+        central question when evaluating descriptor extraction in the field.
+        Pl@ntNet-300K does not expose this grouping.
+  \item \textbf{Image quality.} PlantCLEF carries a user quality vote per
+        image, which allows the evaluation set to be stratified by quality
+        instead of being filtered by hand.
+  \item \textbf{Controlled tier.} The LeafScan subset has no equivalent in
+        Pl@ntNet-300K.
+  \item \textbf{Scale and convenience.} Pl@ntNet-300K is larger (306k images,
+        1,081 species), has official splits, a single CC BY 4.0 licence and a
+        one-step download, which makes it the more practical option and the
+        better one if a learned segmentation step has to be trained.
+\end{itemize}
+
+The two are complementary rather than exclusive: Pl@ntNet-300K as the volume
+source for field images, PlantCLEF 2015--16 for the repeatability and
+image-quality analyses, and its LeafScan subset as an intermediate validation
+step. Confirming this requires two counts that are not published and that we
+should compute when downloading: how many Pl@ntNet-300K images carry the
+\texttt{leaf} organ tag and how they are distributed per species, and how many
+PlantCLEF observations contain more than one leaf image of the same plant.
+
+\section*{Proposed selection}
+
+\begin{itemize}[leftmargin=1.4em,itemsep=0.3em,topsep=0.2em]
+  \item \textbf{Flavia} --- controlled environment in which to develop and
+        initially validate the descriptor extraction pipeline. Isolated leaves
+        on a white background make segmentation trivial, so each descriptor can
+        be checked before any variability is introduced. Its 32 species are too
+        few to support general claims, which is why a second stage is needed.
+  \item \textbf{Natural conditions} --- Pl@ntNet-300K as the main source, with
+        the PlantCLEF 2015--16 leaf and LeafScan subsets used for the
+        repeatability and quality-stratified analyses, subject to the counts
+        above.
+  \item \textbf{Herbarium 2021} --- not used now, but kept on record. It is the
+        only dataset with a metric reference, so it remains the natural option
+        if absolute size is studied later. The current priority is descriptors
+        obtainable directly from leaf geometry and appearance.
+\end{itemize}
+
+Two consequences follow. Since none of the datasets in use provides a scale,
+the descriptors will be dimensionless or relative rather than absolute. And
+since none of the four provides ground-truth morphological annotations --- no
+segmentation masks, no contour points --- validation will require manually
+annotating a small sample.
+
+\section*{Sources}
+
+\begingroup
+\small
+\begin{itemize}[leftmargin=1.4em,itemsep=0.15em,topsep=0.2em]
+  \item Flavia: \url{https://flavia.sourceforge.net/} ---
+        Wu \textit{et al.} (2007), \url{https://arxiv.org/abs/0707.4289}
+  \item Pl@ntNet-300K: \url{https://zenodo.org/records/4726653} ---
+        \url{https://github.com/plantnet/PlantNet-300K}
+  \item PlantCLEF 2015: \url{https://www.imageclef.org/lifeclef/2015/plant} ---
+        2016: \url{https://www.imageclef.org/lifeclef/2016/plant}
+  \item PlantCLEF 2022: \url{https://www.imageclef.org/PlantCLEF2022} ---
+        2024: \url{https://www.imageclef.org/PlantCLEF2024} ---
+        2024 pretrained model: \url{https://zenodo.org/records/10848263}
+  \item Herbarium 2021:
+        \url{https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2021.787127/full}
+        --- \url{https://www.kaggle.com/c/herbarium-2021-fgvc8}
+\end{itemize}
+\endgroup
+
+\end{document}
