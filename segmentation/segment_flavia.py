@@ -208,5 +208,5 @@ def main():
     pd.DataFrame(rows).to_csv(args.output_dir / "metrics.csv", index=False)
     print(f"Done. Processed {len(rows)} images.")
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     main()
