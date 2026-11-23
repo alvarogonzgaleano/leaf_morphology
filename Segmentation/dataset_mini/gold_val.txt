@@ -1,0 +1,10 @@
+/home/alvaro/Escritorio/GII4/TFG/Segmentation/dataset_mini/images/val/db68a298d56ff333209391fbd7c68d0c7d484d96.jpg
+/home/alvaro/Escritorio/GII4/TFG/Segmentation/dataset_mini/images/val/570b5307d096589a145350c1947c2569d0b905bf.jpg
+/home/alvaro/Escritorio/GII4/TFG/Segmentation/dataset_mini/images/val/516d6665b2ea4f55658498ae8965beb7da25bcd9.jpg
+/home/alvaro/Escritorio/GII4/TFG/Segmentation/dataset_mini/images/val/7ab5116e64ccdbef5bd36009f2ff6ec16fc662af.jpg
+/home/alvaro/Escritorio/GII4/TFG/Segmentation/dataset_mini/images/val/ea72553b07c75e9775adc3c862a228b851e5afbc.jpg
+/home/alvaro/Escritorio/GII4/TFG/Segmentation/dataset_mini/images/val/e241e8636e77c13ae7afc897411a3315a58476cf.jpg
+/home/alvaro/Escritorio/GII4/TFG/Segmentation/dataset_mini/images/val/a842e17b17478c608fee6b8258800aee3541b20a.jpg
+/home/alvaro/Escritorio/GII4/TFG/Segmentation/dataset_mini/images/val/75d994604c1b47d50a3e1b5424be6193c1e5abae.jpg
+/home/alvaro/Escritorio/GII4/TFG/Segmentation/dataset_mini/images/val/3d1b359d07d62d5ee01b31e4b9eea98c326c301f.jpg
+/home/alvaro/Escritorio/GII4/TFG/Segmentation/dataset_mini/images/val/fa5841522158b8beb00b82605048b2c8788d822c.jpg

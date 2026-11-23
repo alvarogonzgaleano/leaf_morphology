@@ -1,0 +1,38 @@
+# --- Dataset original (Pl@ntNet-300K, ~80 GB): descargar aparte, ver Dataset/README.md ---
+Dataset/images/
+Dataset/*.zip
+
+# --- Copias de imágenes generadas por el pipeline (se regeneran con los scripts) ---
+Segmentation/dataset/images/
+Segmentation/dataset_mini/images/
+Segmentation/dataset/review_images/
+Segmentation/dataset_mini/review_images/
+Descriptors/resultados_mini/debug/
+*.cache
+
+# --- Pesos de modelos preentrenados (se descargan automáticamente o a mano) ---
+*.pt
+*.pth
+*.onnx
+# ...pero sí se versionan los mejores pesos entrenados en este proyecto
+!Segmentation/runs/segment/*/weights/best.pt
+
+# --- Python / entornos ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# --- Secretos y configuración local ---
+.env
+.env.*
+*.key
+*.pem
+
+# --- Editor / SO ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

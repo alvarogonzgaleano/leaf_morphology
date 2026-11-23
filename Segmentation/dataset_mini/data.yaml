@@ -1,0 +1,4 @@
+train: /home/alvaro/Escritorio/GII4/TFG/Segmentation/dataset_mini/train.txt
+val: /home/alvaro/Escritorio/GII4/TFG/Segmentation/dataset_mini/val.txt
+names:
+  0: leaf
