@@ -1,1 +1,0 @@
-/home/alvaro/Escritorio/GII4/TFG/Segmentation/runs/segment/leaf_mini-2/weights/best.pt
